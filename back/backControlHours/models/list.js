@@ -24,7 +24,7 @@ const deleteForId = (idUser,idList)=>{
         }));
     });
 };
-const create = ({idUser,title,descriptions})=>{
+const create = ({title,descriptions, idUser})=>{
     return new Promise((resolve, reject)=> {
         db.query('INSERT INTO lists (title, descriptions, fk_list_user) values (?, ?, ?)', [title,descriptions,idUser],((error,result)=> {
             if (error) {

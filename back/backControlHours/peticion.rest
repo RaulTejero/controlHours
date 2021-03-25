@@ -5,27 +5,27 @@ GET http://localhost:3000/api/lists/1
 ###
 
 //list for idUser/idList;
-GET http://localhost:3000/api/lists/1/1
+GET http://localhost:3000/api/lists/2/1
 
 
 
 ###
-//idUser/idList;   NO FUNCIONA
+//idUser/idList; 
 POST http://localhost:3000/api/lists/create
 Content-Type: application/json
 
 {
     "title": "UGT",
-    "description": "adeccco madrid",
-    "fk_list_user": 1
+    "descriptions": "adeccco madrid",
+    "idUser": 2
 }
 
 ###
 // idUser/idList
-DELETE http://localhost:3000/api/lists/delete/1/1
+DELETE http://localhost:3000/api/lists/delete/2/1
 
 
-# Persons-----------------
+# Persons----------------------------------------------
 
 // persons of idUser and idList
 GET http://localhost:3000/api/persons/userId/1/listId/1

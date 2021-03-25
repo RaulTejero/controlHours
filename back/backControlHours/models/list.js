@@ -15,7 +15,7 @@ const getForId = (idUser,idList) => {
 };
 const deleteForId = (idUser,idList)=>{
     return new Promise((resolve, reject)=> {
-        db.query("DELETE FROM lists where lists.id = ? and fk_list_user = ?;", [idList, idUser],((error,result)=> {
+        db.query("DELETE FROM lists where id = ? and fk_list_user = ?;", [idList, idUser],((error,result)=> {
             if (error) {
                 reject(error);
             } else {
@@ -35,8 +35,20 @@ const create = ({title,descriptions, idUser})=>{
         }));
     });
 };
+const updateById = ({title,descriptions,idUser,idList})=> {
+    console.log(idUser,idList,title, descriptions);
+    return new Promise((resolve, reject)=> {
+        db.query('UPDATE lists SET title = ?, descriptions = ? where id =? and fk_list_user = ? ',[title,descriptions,idUser,idList],(error, result)=> {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        })
+    })
+}
 
 
 module.exports = {
- getForId, create, deleteForId
+ getForId, create, deleteForId, updateById
 }

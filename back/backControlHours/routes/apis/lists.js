@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 const { getAllLists } = require('../../models/lists');
-const { getForId, deleteForId, create } = require('../../models/list');
+const { getForId, deleteForId, create, updateById } = require('../../models/list');
 
 
 router.get('/:idUser', async (req, res) => {
@@ -41,7 +41,6 @@ router.delete('/delete/:idUser/:idList', async (req,res)=> {
 
 router.post('/create', async (req, res) => {
     try {
-        console.log(req.body);
         const result = await create(req.body);
         if (result.affectedRows === 1) {
             res.json({ message: "Nueva lista creada" });
@@ -52,5 +51,19 @@ router.post('/create', async (req, res) => {
         res.json({ error: error.message })
     }
 });
+
+router.put('/update', async (req,res)=> {
+    try {
+        const result = await updateById(req.body);
+        console.log(result.affectedRows);
+        if (result.affectedRows === 1) {
+            res.json({message:"Lista modificada correctamente"})
+        } else {
+            res.json({message: "No se a podido actualizar"})
+        }
+    } catch (error) {
+        res.json({error:error.message})
+    }
+})
 
 module.exports = router;

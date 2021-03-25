@@ -1,3 +1,13 @@
-GET http://localhost:3000/api/lists
+
+//all lists for userId
+GET http://localhost:3000/api/lists/userId/1/allLists
 
 ###
+
+//list for idList and idUser;
+GET http://localhost:3000/api/lists/userId/1/listId/2
+
+###
+
+// persons of idUser and idList
+GET http://localhost:3000/api/persons/userId/1/listId/1

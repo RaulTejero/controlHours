@@ -5,6 +5,31 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+/** PRUEBAS MYSQL------------ */
+
+// const mysql = require('mysql');
+
+// const connection = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'root',
+//   password: '',
+//   port: 3306,
+//   database: 'controlhours'
+// });
+
+// connection.connect((error) => {
+//   if (error) return console.log(error);
+//   console.log('Se ha conectado correctamente');
+//   connection.query('select * from lists', (error, rows) => {
+//     if (error) return console.log(error);
+//     console.log(rows);
+//   });
+// });
+/** FIN PRUEBAS MYSQL----------- */
+
+// npm install mysql and dotenv
+// create and configure => dbConfig and .env 
+// require .createPool
 require('./dataBaseConfig').createPool();
 
 var indexRouter = require('./routes/index');

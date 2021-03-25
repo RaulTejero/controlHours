@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAllUsersForListsId } = require('../../models/persons');
+const { getAllPersons } = require('../../models/persons');
 
 
 router.get('/userId/:idUser/listId/:idList', async(req,res)=> {
     try {
-        const result = await getAllUsersForListsId(req.params.idList, req.params.idUser);
+        const result = await getAllPersons(req.params.idList, req.params.idUser);
         res.json(result);
     } catch (error) {
         res.json({error:error.message})

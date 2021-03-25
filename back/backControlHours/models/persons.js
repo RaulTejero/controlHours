@@ -1,18 +1,21 @@
-const getAllUsersForListsId = (idList, idUser)=> {
+const getAllPersons = (idList, idUser)=> {
     return new Promise((resolve, reject)=> {
         db.query("SELECT * FROM persons where fk_person_list = ? and fk_person_user = ?;",[idList,idUser], ((error,rows)=>{
             if(error) {
-                console.log(error);
                 reject(error);
             }else {
-                resolve(rows);
-                console.log(rows);
-            }
-        }))
-    })
-}
+                if (rows.lenght === 0) {
+                    resolve(null)
+                } else {
+                    resolve(rows);
+                };
+            };
+        }));
+    });
+};
+
 
 
 module.exports = {
-    getAllUsersForListsId
-}
+    getAllPersons
+};

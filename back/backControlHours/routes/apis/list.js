@@ -30,10 +30,10 @@ router.delete('/:idList/user/:idUser', async (req,res)=> {
     const deletedList = await getForId(req.params.idUser, req.params.idList);
     try {
         const result = await deleteForId(req.params.idUser, req.params.idList );
-        if (result.affectedRows === 1) {
-            res.json({message: "Se ha borrado correctamente", deleteRow : deletedList})
+        if (result.affectedRows != 0) {
+            res.json({message: "Se ha borrado correctamente.", deleteList : deletedList})
         } else {
-            res.json({error:"Error al eliminar"})
+            res.json({error:null,affectedRows: 0, message:"Error, lista no eliminada."})
         }
     } catch (error) {
         res.json({error:error.message})
@@ -43,10 +43,10 @@ router.delete('/:idList/user/:idUser', async (req,res)=> {
 router.post('/create', async (req, res) => {
     try {
         const result = await create(req.body);
-        if (result.affectedRows === 1) {
-            res.json({ message: "Nueva lista creada", newList: req.body });
+        if (result.affectedRows != 0) {
+            res.json({ message: "Lista creada", newList: req.body });
         } else {
-            res.json({ error: "No se a podido crear la nueva lista" });
+            res.json({ error: null, affectedRows: 0, message: "Error, lista no creada."});
         }
     } catch (error) {
         res.json({ error: error.message })
@@ -58,10 +58,10 @@ router.put('/update', async (req,res)=> {
     const changes = req.body;
     try {
         const result = await updateById(req.body.id,req.body.idUser,req.body);
-        if (result.affectedRows === 1) {
+        if (result.affectedRows != 0 ) {
             res.json({message:"Lista modificada correctamente",originList:listAffected, newList: changes})
         } else {
-            res.json({message: "No se a podido actualizar"})
+            res.json({ error: null, affectedRows: 0, message: "Error, lista no actualizada."});
         }
     } catch (error) {
         res.json({error:error.message})

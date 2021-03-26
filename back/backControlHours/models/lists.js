@@ -4,7 +4,7 @@ const getAllLists = (idUser) => {
             if (error) {
                 reject(error);
             } else {
-                if (rows.length === 0) {
+                if (rows.length < 1) {
                     resolve(null)
                 } else {                    
                     resolve(rows)
@@ -13,10 +13,6 @@ const getAllLists = (idUser) => {
         });
     });
 };
-
-
-
-
 
 module.exports = {
     getAllLists

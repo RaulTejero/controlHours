@@ -1,6 +1,6 @@
 # lists----------------------------------------
 //GET all lists for idUser
-GET http://localhost:3000/api/list/all/user/2
+GET http://localhost:3000/api/list/all/user/1
 
 ###
 
@@ -9,7 +9,7 @@ GET http://localhost:3000/api/list/12/user/1
 
 ###
 //DELETE list, idUser/idList
-DELETE http://localhost:3000/api/list/19/user/2
+DELETE http://localhost:3000/api/list/21/user/2
 
 ###
 //CREATE list, idUser/idList; 
@@ -28,7 +28,7 @@ PUT http://localhost:3000/api/list/update
 Content-Type: application/json
 
 {
-    "id":20,
+    "id":22,
     "title": "COSTO",
     "descriptions": "Añmeria",
     "idUser":2
@@ -42,6 +42,8 @@ GET http://localhost:3000/api/person/all/user/2/list/16
 
 ###
 
-// person for id
+// person for id idperson/idList/idUser
 GET http://localhost:3000/api/person/16/list/16/user/2
-# :idPerson/list/:idList/user/:idUser
+
+
+###

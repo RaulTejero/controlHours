@@ -43,7 +43,7 @@ GET http://localhost:3000/api/person/all/user/2/list/16
 ###
 
 // person for id idperson/idList/idUser
-GET http://localhost:3000/api/person/16/list/16/user/2
+GET http://localhost:3000/api/person/17/list/13/user/1  
 
 
 ###

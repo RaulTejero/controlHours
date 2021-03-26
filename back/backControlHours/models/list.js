@@ -15,24 +15,24 @@ const getForId = (idUser, idList) => {
 };
 const deleteForId = (idUser, idList) => {
     return new Promise((resolve, reject) => {
-        db.query("DELETE FROM lists WHERE id = ? AND fk_user = ?;", [idList, idUser], ((error, row) => {
+        db.query("DELETE FROM lists WHERE id = ? AND fk_user = ?;", [idList, idUser], (error, row) => {
             if (error) {
                 reject(error);
             } else {
                 resolve(row);
             };
-        }));
+        });
     });
 };
 const create = ({ title, descriptions, idUser }) => {
     return new Promise((resolve, reject) => {
-        db.query('INSERT INTO lists (title, descriptions, fk_user) VALUES (?, ?, ?);', [title, descriptions, idUser], ((error, row) => {
+        db.query('INSERT INTO lists (title, descriptions, fk_user) VALUES (?, ?, ?);', [title, descriptions, idUser], (error, row) => {
             if (error) {
                 reject(error);
             } else {
                 resolve(row);
             };
-        }));
+        });
     });
 };
 const updateById = (id, idUser, { title, descriptions }) => {

@@ -1,43 +1,47 @@
 # lists----------------------------------------
 //GET all lists for idUser
-GET http://localhost:3000/api/lists/1
+GET http://localhost:3000/api/list/all/user/2
 
 ###
 
-//GET list for idUser/idList;
-GET http://localhost:3000/api/lists/1/13
+//GET list for idList/idUser;
+GET http://localhost:3000/api/list/12/user/1
 
-
+###
+//DELETE list, idUser/idList
+DELETE http://localhost:3000/api/list/19/user/2
 
 ###
 //CREATE list, idUser/idList; 
-POST http://localhost:3000/api/lists/create
+POST http://localhost:3000/api/list/create
 Content-Type: application/json
 
 {
-    "title": "MERCA",
-    "descriptions": " madrid",
+    "title": "MERCAdona",
+    "descriptions": " sevilla",
     "idUser": 2
 }
 
 ###
-//DELETE list, idUser/idList
-DELETE http://localhost:3000/api/lists/delete/2/13
-
-###
-
 //UPDATE list, idUser/idList
-PUT http://localhost:3000/api/lists/update
+PUT http://localhost:3000/api/list/update
 Content-Type: application/json
 
 {
-    "title": "UGTttt",
-    "descriptions": "graddddo",
-    "idUser":1,
-    "idList":12
+    "id":20,
+    "title": "COSTO",
+    "descriptions": "Añmeria",
+    "idUser":2
 }
 ###
-# Persons----------------------------------------------
 
-// persons of idUser and idList
-GET http://localhost:3000/api/persons/userId/1/listId/1
+#Persons----------------------------------------------
+
+// persons of list idUser/ idList
+GET http://localhost:3000/api/person/all/user/2/list/16
+
+###
+
+// person for id
+GET http://localhost:3000/api/person/16/list/16/user/2
+# :idPerson/list/:idList/user/:idUser

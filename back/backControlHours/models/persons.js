@@ -1,11 +1,11 @@
-const getAllPersons = (idList, idUser)=> {
+const getAllPersons = (idUser, idList)=> {
     return new Promise((resolve, reject)=> {
-        db.query("SELECT * FROM persons where fk_person_list = ? and fk_person_user = ?;",[idList,idUser], ((error,rows)=>{
+        db.query("SELECT * FROM persons WHERE fk_list = ? AND fk_user = ?;",[idList,idUser], ((error,rows)=>{
             if(error) {
                 reject(error);
             }else {
-                if (rows.lenght === 0) {
-                    resolve(null)
+                if (rows.length < 1) {
+                    resolve(null);
                 } else {
                     resolve(rows);
                 };
@@ -13,8 +13,6 @@ const getAllPersons = (idList, idUser)=> {
         }));
     });
 };
-
-
 
 module.exports = {
     getAllPersons

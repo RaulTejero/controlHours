@@ -1,6 +1,6 @@
 const getAllLists = (idUser) => {
     return new Promise((resolve, reject) => {
-        db.query('select * from lists where fk_user = ?', [idUser], (error, rows) => {
+        db.query('SELECT * FROM lists WHERE fk_user = ?', [idUser], (error, rows) => {
             if (error) {
                 reject(error);
             } else {

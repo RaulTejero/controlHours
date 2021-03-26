@@ -5,7 +5,7 @@ GET http://localhost:3000/api/lists/1
 ###
 
 //GET list for idUser/idList;
-GET http://localhost:3000/api/lists/1/11
+GET http://localhost:3000/api/lists/1/13
 
 
 
@@ -15,14 +15,14 @@ POST http://localhost:3000/api/lists/create
 Content-Type: application/json
 
 {
-    "title": "UGT",
-    "descriptions": "empresa madrid",
-    "idUser": 1
+    "title": "MERCA",
+    "descriptions": " madrid",
+    "idUser": 2
 }
 
 ###
 //DELETE list, idUser/idList
-DELETE http://localhost:3000/api/lists/delete/1/11
+DELETE http://localhost:3000/api/lists/delete/2/13
 
 ###
 

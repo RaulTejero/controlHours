@@ -31,37 +31,36 @@ router.delete('/:idList/user/:idUser', async (req,res)=> {
     try {
         const result = await deleteForId(req.params.idUser, req.params.idList );
         if (result.affectedRows != 0) {
-            res.json({message: "Se ha borrado correctamente.", deleteList : deletedList})
+            res.json({message: "Eliminada correctamente.", deleteList : deletedList})
         } else {
-            res.json({error:null,affectedRows: 0, message:"Error, lista no eliminada."})
+            res.json({error:null,affectedRows: 0, message:"Error, no se ha podido eliminar."})
         }
     } catch (error) {
         res.json({error:error.message})
     };
 });
 
-router.post('/create', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const result = await create(req.body);
         if (result.affectedRows != 0) {
-            res.json({ message: "Lista creada", newList: req.body });
+            res.json({ message: "Creada correctamente", newList: req.body });
         } else {
-            res.json({ error: null, affectedRows: 0, message: "Error, lista no creada."});
+            res.json({ error: null, affectedRows: 0, message: "Error, no se a podido crear."});
         }
     } catch (error) {
         res.json({ error: error.message })
     }
 });
 
-router.put('/update', async (req,res)=> {
+router.put('/', async (req,res)=> {
     const listAffected = await getForId(req.body.idUser,req.body.id);
-    const changes = req.body;
     try {
         const result = await updateById(req.body.id,req.body.idUser,req.body);
         if (result.affectedRows != 0 ) {
-            res.json({message:"Lista modificada correctamente",originList:listAffected, newList: changes})
+            res.json({message:"Modificada correctamente",originList:listAffected, newList: req.body})
         } else {
-            res.json({ error: null, affectedRows: 0, message: "Error, lista no actualizada."});
+            res.json({ error: null, affectedRows: 0, message: "Error, no se ha podido actualizar."});
         }
     } catch (error) {
         res.json({error:error.message})

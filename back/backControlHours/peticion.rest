@@ -9,11 +9,11 @@ GET http://localhost:3000/api/list/12/user/1
 
 ###
 //DELETE list, idUser/idList
-DELETE http://localhost:3000/api/list/21/user/2
+DELETE http://localhost:3000/api/list/23/user/2
 
 ###
 //CREATE list, idUser/idList; 
-POST http://localhost:3000/api/list/create
+POST http://localhost:3000/api/list
 Content-Type: application/json
 
 {
@@ -24,26 +24,94 @@ Content-Type: application/json
 
 ###
 //UPDATE list, idUser/idList
-PUT http://localhost:3000/api/list/update
+PUT http://localhost:3000/api/list
 Content-Type: application/json
 
 {
     "id":22,
     "title": "COSTO",
-    "descriptions": "Añmeria",
+    "descriptions": "Valencia",
     "idUser":2
 }
 ###
 
-#Persons----------------------------------------------
+#--------------PERSONS--------------
 
 // persons of list idUser/ idList
-GET http://localhost:3000/api/person/all/user/2/list/16
+GET http://localhost:3000/api/person/all/list/22/user/2
 
 ###
 
 // person for id idperson/idList/idUser
-GET http://localhost:3000/api/person/17/list/13/user/1  
+GET http://localhost:3000/api/person/17/list/13/user/1
 
+###
+// CREATE person 
+
+POST http://localhost:3000/api/person 
+Content-Type: application/json
+
+{
+    "name": "Chloe",
+    "description": "carretillas",
+    "hoursInitial": 87,
+    "hoursYielded": 50,
+    "hoursRemaining": 0,
+    "hoursUsed": 0,
+    "hoursBagUsed": 0,
+    "idList": 22,
+    "idUser": 2
+}
+
+
+###
+// DELETE person for id idperson/idList/idUser
+DELETE http://localhost:3000/api/person/32/list/22/user/2 
+
+
+###
+// UPDATE person for id idperson/idList/idUser
+PUT http://localhost:3000/api/person 
+Content-Type: application/json
+
+{
+    "idPerson": 36,
+    "name": "jhdjhd",
+    "description": "carretillas",
+    "hoursInitial": 87,
+    "hoursYielded": 50,
+    "hoursRemaining": 0,
+    "hoursUsed": 0,
+    "hoursBagUsed": 0,
+    "idList": 22,
+    "idUser": 2
+}
+
+
+###
+//------USERS------------------------------
+
+
+GET http://localhost:3000/api/user/raul@gmail.com
+
+###
+POST http://localhost:3000/api/user/create
+Content-Type: application/json
+
+{
+    "username": "pepito",
+    "mail": "peito@gmail.com",
+    "password" : "212332123"
+}
+
+###
+# PUT http://localhost:3000/api/user
+# Content-Type: application/json
+
+# {
+#     "username": "raul",
+#     "mail": "raul@gmail.com",
+#     "password" : "raul"
+# }
 
 ###

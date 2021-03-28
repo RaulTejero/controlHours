@@ -3,10 +3,10 @@ const getPersonById = (idUser, idList, idPerson) => {
         db.query('SELECT * FROM persons WHERE id = ? AND fk_list = ? AND fk_user = ?;', [idPerson, idList, idUser],
             (error, row) => {
                 if (error) {
-                    reject(error);
+                    reject(error);//490 
                 } else {
                     if (row.length < 1) {
-                        resolve(null);
+                        resolve({error: 427 });
                     } else {
                         resolve(row);
                     };
@@ -15,9 +15,10 @@ const getPersonById = (idUser, idList, idPerson) => {
     });
 };
 
-const create = ({ name, description, hoursInitial, hours, hoursUsed, idList, idUser }) => {
+const create = ({ name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
+    hoursBagUsed, idList, idUser }) => {
     return new Promise((resolve, reject) => {
-        db.query('INSERT INTO persons (name,description, hours_initial, hours, hours_used, fk_list, fk_user ) VALUES (?,?,?,?,?,?,?,?);', [name, description, hoursInitial, hours, hoursUsed, idList, idUser], (error, result) => {
+        db.query('INSERT INTO persons (nameFull,descriptions, hours_initials, hours_yielded, hours_remaining, hours_used, hours_bag_used, fk_list, fk_user ) VALUES (?,?,?,?,?,?,?,?,?);', [name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed, hoursBagUsed, idList, idUser], (error, result) => {
             if (error) {
                 reject(error);
             } else {
@@ -27,11 +28,12 @@ const create = ({ name, description, hoursInitial, hours, hoursUsed, idList, idU
     });
 };
 
+
 const deleteForId = (idUser, idList, idPerson) => {
     return new Promise((resolve, reject) => {
-        db.query('DELETE INTO persons WHERE id = ? AND fk_list = ? AND fk_user = ?;', [idPerson, idList, idUser], (error, row) => {
+        db.query('DELETE FROM persons WHERE id = ? AND fk_list = ? AND fk_user = ?;', [idPerson, idList, idUser], (error, row) => {
             if (error) {
-                reject(error);
+                reject(error);//490
             } else {
                 resolve(row);
             };
@@ -39,9 +41,11 @@ const deleteForId = (idUser, idList, idPerson) => {
     });
 };
 
-const updateById = (idUser, idList, idPerson, { name, descriptions, hoursInitial, hours, hoursUsed }) => {
+const updateById = (idUser, idList, idPerson, {  name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
+    hoursBagUsed}) => {
     return new Promise((resolve, reject) => {
-        db.query('UPDATE persons SET nameFull = ?, descriptions = ?, hours_initials = ?, hours = ?, hours_used = ?  WHERE id = ? AND fk_list = ? AND fk_user = ? );', [name, descriptions, hoursInitial, hours, hoursUsed, idPerson,idList,idUser ], (error, row) => {
+        db.query('UPDATE persons SET nameFull = ?, descriptions = ?,  hours_initials = ?, hours_yielded = ?, hours_remaining = ?, hours_used = ?, hours_bag_used = ? WHERE id = ? AND fk_list = ? AND fk_user = ?;', [ name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
+            hoursBagUsed, idPerson, idList, idUser], (error, row) => {
             if (error) {
                 reject(error);
             } else {

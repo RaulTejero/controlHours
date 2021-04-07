@@ -3,7 +3,7 @@ const getPersonById = (idUser, idList, idPerson) => {
         db.query('SELECT * FROM persons WHERE id = ? AND fk_list = ? AND fk_user = ?;', [idPerson, idList, idUser],
             (error, row) => {
                 if (error) {
-                    reject(error);//490 
+                    reject(error);
                 } else {
                     if (row.length < 1) {
                         resolve({error: 427 });
@@ -14,6 +14,24 @@ const getPersonById = (idUser, idList, idPerson) => {
             });
     });
 };
+
+const calcHoursRemaining = (idUser, idList, idPerson, {hoursInitial, hoursYielded}) => {
+    return new Promise((resolve, reject) => {
+        db.query('UPDATE persons SET hours_remaining = ? - ? WHERE id = ? AND fk_list = ? AND fk_user = ?;', [hoursInitial, hoursYielded, idPerson, idList, idUser],
+            (error, row) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if (row.length < 1) {
+                        resolve({error: 427 });
+                    } else {
+                        resolve(row);
+                    };
+                };
+            });
+    });
+};
+// TODO: clacular horas 
 
 const create = ({ name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
     hoursBagUsed, idList, idUser }) => {
@@ -61,4 +79,5 @@ module.exports = {
     create,
     deleteForId,
     updateById,
+    calcHoursRemaining
 }

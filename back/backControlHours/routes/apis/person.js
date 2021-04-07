@@ -4,11 +4,13 @@ const router = express.Router();
 const {
     getAllPersons,
 } = require('../../models/persons');
+
 const {
     getPersonById,
     create,
     deleteForId,
-    updateById
+    updateById,
+    calcHoursRemaining
 } = require('../../models/person')
 
 
@@ -34,6 +36,14 @@ router.get('/:idPerson/list/:idList/user/:idUser', async (req, res) => {
     };
 });
 
+router.post('hoursRemaining/:hoursInitials/:hoursYielded', async (req, res)=> {
+    try {
+        const result = await calcHoursRemaining(req.body)
+    } catch (error) {
+        res.json({error: error.message});
+    };
+});
+// TODO: clacular horas 
 router.post('/', async (req, res) => {
     try {
         const result = await create(req.body);
@@ -46,6 +56,7 @@ router.post('/', async (req, res) => {
         res.json({ error: error.message })
     };
 });
+
 
 router.delete('/:idPerson/list/:idList/user/:idUser', async (req, res) => {
     const deletePerson = await getPersonById(req.params.idUser, req.params.idList, req.params.idPerson);

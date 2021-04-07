@@ -100,18 +100,18 @@ Content-Type: application/json
 
 {
     "username": "pepito",
-    "mail": "peito@gmail.com",
+    "mail": "pepito@gmail.com",
     "password" : "212332123"
 }
 
 ###
-# PUT http://localhost:3000/api/user
-# Content-Type: application/json
+PUT http://localhost:3000/api/user
+Content-Type: application/json
 
-# {
-#     "username": "raul",
-#     "mail": "raul@gmail.com",
-#     "password" : "raul"
-# }
+{
+    "username": "raul",
+    "mail": "raul@gmail.com",
+    "password" : "raul"
+}
 
 ###

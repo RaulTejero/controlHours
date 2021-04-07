@@ -27,16 +27,16 @@ router.post('/create', async (req, res) => {
     console.log(user);
     // TODO: repasar filtrar si existe el mail
     try {
-        // if (user.code === 233) {
-        //     const result = await create(req.body);
-        //     if (result.affectedRows < 1) {
-        //         res.json({ error: 427 });
-        //     } else {
-        //         res.json({ code: 230 })
-        //     }
-        // }else {
-        //     res.json({code:233});
-        // }
+        if (user.length < 1) {
+            const result = await create(req.body);
+            if (result.affectedRows < 1) {
+                res.json({ error: 427 });
+            } else {
+                res.json({ code: 230 })
+            }
+        }else {
+            res.json({code:233});
+        }
     } catch (error) {
         res.json({ error: error.messaje });
     };

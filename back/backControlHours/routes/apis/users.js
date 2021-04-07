@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 const {
     getUserByMail,
@@ -21,21 +22,20 @@ router.get('/:mail', async (req, res) => {
     }
 });
 
-router.post('/create', async (req, res) => {
-    const { mail } = req.body;
-    const user = await getUserByMail(mail);
-    console.log(user);
-    // TODO: repasar filtrar si existe el mail
+router.post('/', async (req, res) => {
     try {
-        if (user.length < 1) {
+        const { mail } = req.body;
+        const userMail = await getUserByMail(mail);
+        if (userMail.length < 1) {
+            req.body.password = bcrypt.hashSync(req.body.password,10);
             const result = await create(req.body);
             if (result.affectedRows < 1) {
                 res.json({ error: 427 });
             } else {
-                res.json({ code: 230 })
+                res.json({ code: 230, message: "create" })
             }
-        }else {
-            res.json({code:233});
+        } else {
+            res.json({ code: 233, error: "no create" });
         }
     } catch (error) {
         res.json({ error: error.messaje });
@@ -43,9 +43,13 @@ router.post('/create', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
-    const userAffected = await getUserByMail(req.body.mail);
     try {
         const result = await update(req.body);
+        if (result.affectedRows != 0) {
+            res.json({ code: 230 });
+        } else {
+            res.json({ code: 427 });
+        }
     } catch (error) {
         res.json({ error: error.messaje });
     };

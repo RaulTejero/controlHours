@@ -92,26 +92,32 @@ Content-Type: application/json
 //------USERS------------------------------
 
 
+// GET USER BY MAIL
 GET http://localhost:3000/api/user/raul@gmail.com
 
 ###
-POST http://localhost:3000/api/user/create
+
+# CREATE USER 
+POST http://localhost:3000/api/user/
 Content-Type: application/json
 
 {
-    "username": "pepito",
-    "mail": "pepito@gmail.com",
+    "username": "lore",
+    "mail": "lore@gmail.com",
     "password" : "212332123"
 }
 
 ###
+# UPDATE USER 
+
 PUT http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-    "username": "raul",
-    "mail": "raul@gmail.com",
-    "password" : "raul"
+    "id":11,
+    "username": "pepito",
+    "mail": "pepito@gmail.com",
+    "password" : "jdsdjksjh"
 }
 
 ###

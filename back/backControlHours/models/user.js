@@ -22,6 +22,17 @@ const getUserByMail = (mail) => {
         });
     });
 };
+const getUserByMailAndId = (mail,id) => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM users WHERE mail = ? AND id = ?;',[mail, id], (error, row) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(row);
+            };
+        });
+    });
+};
 
 const update = ({id,username,mail,password})=> {
     return new Promise((resolve,reject)=> {
@@ -36,6 +47,7 @@ const update = ({id,username,mail,password})=> {
 };
 module.exports = {
     getUserByMail,
+    getUserByMailAndId,
     create,
     update
 }

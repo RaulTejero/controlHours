@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const {
     getUserByMail,
@@ -27,7 +28,7 @@ router.post('/', async (req, res) => {
         const { mail } = req.body;
         const userMail = await getUserByMail(mail);
         if (userMail.length < 1) {
-            req.body.password = bcrypt.hashSync(req.body.password,10);
+            req.body.password = bcrypt.hashSync(req.body.password, 10);
             const result = await create(req.body);
             if (result.affectedRows < 1) {
                 res.json({ error: 427 });
@@ -41,6 +42,31 @@ router.post('/', async (req, res) => {
         res.json({ error: error.messaje });
     };
 });
+
+router.post('/login', async (req, res) => {
+    try {
+        const { mail, password } = req.body;
+        const user = await getUserByMail(mail);
+        if (user.length != 1) {
+            return res.json({ error: 427 });
+        }
+        // const passwordCompared = bcrypt.compareSync(password, user[0].password);  --> no me ha funcionado
+        if (password != user[0].password) {
+            return res.json({ error: 427, message: "password does not exist" })
+        } else {
+            res.json({ message: "ok", token: createToken(user)  })
+        }
+    } catch (error) {
+        res.json({ error: error.messaje});
+    };
+})
+
+function createToken(user) {
+    const obj = {
+        id: user.id,
+    }
+    return jwt.sign(obj, process.env.SECRET_KEY)
+};
 
 router.put('/', async (req, res) => {
     try {

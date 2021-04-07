@@ -102,9 +102,17 @@ POST http://localhost:3000/api/user/
 Content-Type: application/json
 
 {
-    "username": "lore",
-    "mail": "lore@gmail.com",
+    "username": "nuevo",
+    "mail": "nuevo@gmail.com",
     "password" : "212332123"
+}
+###
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "mail": "nuevo@gmail.com",
+    "password" : "$2b$10$GEzesfn/TmpjFJ7ZaqJVSe3gUwDjh8yatfFKk3"
 }
 
 ###

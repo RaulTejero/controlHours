@@ -16,7 +16,7 @@ const getUserByMail = (mail) => {
         db.query('SELECT * FROM users WHERE mail = ? ;',[mail], (error, row) => {
             if (error) {
                 reject(error);
-            } else {
+            }else {
                 resolve(row);
             };
         });

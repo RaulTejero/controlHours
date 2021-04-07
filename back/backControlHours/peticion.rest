@@ -107,8 +107,6 @@ Content-Type: application/json
     "password" : "212332123"
 }
 ###
-
-#  login user
 POST http://localhost:3000/api/user/login
 Content-Type: application/json
 

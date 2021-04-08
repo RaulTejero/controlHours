@@ -77,7 +77,7 @@ router.put('/', async (req, res) => {
         const personAffected = await getPersonById(req.body.idUser, req.body.idList, req.body.idPerson);
         const result = await updateById(req.body);
         if (result.affectedRows != 0) {
-            res.json({ message: "Modificado correctamente", originPerson: personAffected, updatePerson: req.body })
+            res.json({ status: 251, updatePerson: personAffected, changesPerson:[req.body]  })
         } else {
             res.json({code: 427})
         }

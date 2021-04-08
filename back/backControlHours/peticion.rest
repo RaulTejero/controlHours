@@ -30,7 +30,7 @@ Content-Type: application/json
 {
     "id":22,
     "title": "COSTO",
-    "descriptions": "Valencia",
+    "descriptions": "Vancia",
     "idUser":2
 }
 ###
@@ -38,7 +38,7 @@ Content-Type: application/json
 #--------------PERSONS--------------
 
 // persons of list idUser/ idList
-GET http://localhost:3000/api/person/all/list/22/user/2
+GET http://localhost:3000/api/person/all/list/22/user/7
 
 ###
 
@@ -52,9 +52,9 @@ POST http://localhost:3000/api/person
 Content-Type: application/json
 
 {
-    "name": "Chloe",
+    "name": "Chjke",
     "description": "carretillas",
-    "hoursInitial": 87,
+    "hoursInitial": 100,
     "hoursYielded": 50,
     "hoursRemaining": 0,
     "hoursUsed": 0,
@@ -66,7 +66,7 @@ Content-Type: application/json
 
 ###
 // DELETE person for id idperson/idList/idUser
-DELETE http://localhost:3000/api/person/32/list/22/user/2 
+DELETE http://localhost:3000/api/person/43/list/22/user/2
 
 
 ###
@@ -75,16 +75,16 @@ PUT http://localhost:3000/api/person
 Content-Type: application/json
 
 {
-    "idPerson": 36,
+    "idPerson": 22,
     "name": "jhdjhd",
     "description": "carretillas",
-    "hoursInitial": 87,
+    "hoursInitial": 200,
     "hoursYielded": 50,
     "hoursRemaining": 0,
     "hoursUsed": 0,
     "hoursBagUsed": 0,
-    "idList": 22,
-    "idUser": 2
+    "idList": 12,
+    "idUser": 1
 }
 
 

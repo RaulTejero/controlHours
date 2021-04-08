@@ -49,27 +49,27 @@ router.post('/login', async (req, res) => {
         const user = await getUserByMail(mail);
         if (user.length != 1) {
             return res.json({ error: 427 });
-        }
-        // const passwordCompared = bcrypt.compareSync(password, user[0].password);  --> no me ha funcionado
+        };
         if (password != user[0].password) {
             return res.json({ status: 467, error: 458 })
         } else {
             res.json({ status: 251, token: createToken(user)  })
-        }
+        };
     } catch (error) {
         res.json({ error: error.messaje});
     };
-})
+});
 
 function createToken(user) {
     const obj = {
         id: user.id,
-    }
+    };
     return jwt.sign(obj, process.env.SECRET_KEY)
 };
 
 router.put('/', async (req, res) => {
     try {
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
         const result = await update(req.body);
         if (result.affectedRows != 0) {
             res.json({ status: 251 });

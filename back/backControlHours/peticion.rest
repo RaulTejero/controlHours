@@ -89,6 +89,13 @@ Content-Type: application/json
 
 
 ###
+# restore hours 
+
+PUT http://localhost:3000/api/person/restore/13/1
+
+###
+
+
 //------USERS------------------------------
 
 
@@ -114,7 +121,7 @@ Content-Type: application/json
 
 {
     "mail": "nuevo@gmail.com",
-    "password" : "$2b$10$GEzesfn/TmpjFJ7ZaqJVSe3gUwDjh8yatfFKk3"
+    "password" : "$2b$10$zFFiRx3KTPUpW4g6zalE1OHMbeDYAwZPMtEOlc"
 }
 
 ###
@@ -124,9 +131,9 @@ PUT http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-    "id":11,
-    "username": "pepito",
-    "mail": "pepito@gmail.com",
+    "id":13,
+    "username": "nuevoCambio",
+    "mail": "nuevo@gmail.com",
     "password" : "jdsdjksjh"
 }
 

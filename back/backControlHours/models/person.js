@@ -12,26 +12,6 @@ const getPersonById = (idUser, idList, idPerson) => {
 };
 
 
-//calc (hours initial - hours yielded) = hours disfrute
-
-// const calcHoursRemaining = (idPerson, hoursInitial, hoursYielded ) => {
-//     return new Promise((resolve, reject) => {
-//         db.query('UPDATE persons SET hours_remaining = ? - ? WHERE id = ? ;', [hoursInitial, hoursYielded, idPerson],
-//             (error, row) => {
-//                 if (error) {
-//                     reject(error);
-//                 } else {
-//                     if (row.length < 1) {
-//                         resolve({ error: 427 });
-//                     } else {
-//                         resolve(row);
-//                     };
-//                 };
-//             });
-//     });
-// };
-
-
 const create = ({ name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
     hoursBagUsed, idList, idUser }) => {
     return new Promise((resolve, reject) => {

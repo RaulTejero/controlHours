@@ -9,18 +9,24 @@ const { getForId, deleteForId, create, updateById } = require('../../models/list
 router.get('/all/user/:idUser', async (req, res) => {
     try {
         const result = await getAllLists(req.params.idUser);
-        res.json(result)
+        if (result.length < 1) {
+            res.json({status:467, error: 427, result: null})
+        } else {
+            res.json({status: 251, result: result})
+        };
     } catch (error) {
         res.json({ error: error.message })
-    }
+    };
 });
-
-
 
 router.get('/:idList/user/:idUser', async (req, res) => {
     try {
         const result = await getForId(req.params.idUser, req.params.idList);
-        res.json(result)
+        if (!result) {
+            res.json({status:467, error:427})
+        } else {
+            res.json({status: 251, result:result})   
+        };
     } catch (error) {
         res.json({ error: error.message })
     };
@@ -31,10 +37,10 @@ router.delete('/:idList/user/:idUser', async (req,res)=> {
     try {
         const result = await deleteForId(req.params.idUser, req.params.idList );
         if (result.affectedRows != 0) {
-            res.json({message: "Eliminada correctamente.", deleteList : deletedList})
+            res.json({status: 251, result: deletedList});
         } else {
-            res.json({error:null,affectedRows: 0, message:"Error, no se ha podido eliminar."})
-        }
+            res.json({status:467,error:427})
+        };
     } catch (error) {
         res.json({error:error.message})
     };
@@ -44,13 +50,13 @@ router.post('/', async (req, res) => {
     try {
         const result = await create(req.body);
         if (result.affectedRows != 0) {
-            res.json({ message: "Creada correctamente", newList: req.body });
+            res.json({ status: 251, newList: req.body });
         } else {
-            res.json({ error: null, affectedRows: 0, message: "Error, no se a podido crear."});
+            res.json({ status:467});
         }
     } catch (error) {
         res.json({ error: error.message })
-    }
+    };
 });
 
 router.put('/', async (req,res)=> {
@@ -58,13 +64,13 @@ router.put('/', async (req,res)=> {
     try {
         const result = await updateById(req.body.id,req.body.idUser,req.body);
         if (result.affectedRows != 0 ) {
-            res.json({message:"Modificada correctamente",originList:listAffected, newList: req.body})
+            res.json({ status: 251,result:{updateList:listAffected, changesList: [req.body]} })
         } else {
-            res.json({ error: null, affectedRows: 0, message: "Error, no se ha podido actualizar."});
-        }
+            res.json({ status: 467, error: 427});
+        };
     } catch (error) {
         res.json({error:error.message})
-    }
+    };
 });
 
 module.exports = router;

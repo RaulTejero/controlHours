@@ -5,33 +5,32 @@ const getPersonById = (idUser, idList, idPerson) => {
                 if (error) {
                     reject(error);
                 } else {
-                    if (row.length < 1) {
-                        resolve({error: 427 });
-                    } else {
-                        resolve(row);
-                    };
+                    resolve(row);
                 };
             });
     });
 };
 
-const calcHoursRemaining = (idUser, idList, idPerson, {hoursInitial, hoursYielded}) => {
-    return new Promise((resolve, reject) => {
-        db.query('UPDATE persons SET hours_remaining = ? - ? WHERE id = ? AND fk_list = ? AND fk_user = ?;', [hoursInitial, hoursYielded, idPerson, idList, idUser],
-            (error, row) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    if (row.length < 1) {
-                        resolve({error: 427 });
-                    } else {
-                        resolve(row);
-                    };
-                };
-            });
-    });
-};
-// TODO: clacular horas 
+
+//calc (hours initial - hours yielded) = hours disfrute
+
+// const calcHoursRemaining = (idPerson, hoursInitial, hoursYielded ) => {
+//     return new Promise((resolve, reject) => {
+//         db.query('UPDATE persons SET hours_remaining = ? - ? WHERE id = ? ;', [hoursInitial, hoursYielded, idPerson],
+//             (error, row) => {
+//                 if (error) {
+//                     reject(error);
+//                 } else {
+//                     if (row.length < 1) {
+//                         resolve({ error: 427 });
+//                     } else {
+//                         resolve(row);
+//                     };
+//                 };
+//             });
+//     });
+// };
+
 
 const create = ({ name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
     hoursBagUsed, idList, idUser }) => {
@@ -59,20 +58,22 @@ const deleteForId = (idUser, idList, idPerson) => {
     });
 };
 
-const updateById = (idUser, idList, idPerson, {  name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
-    hoursBagUsed}) => {
+const updateById = ({ name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
+    hoursBagUsed,idUser, idList, idPerson}) => {
     return new Promise((resolve, reject) => {
-        db.query('UPDATE persons SET nameFull = ?, descriptions = ?,  hours_initials = ?, hours_yielded = ?, hours_remaining = ?, hours_used = ?, hours_bag_used = ? WHERE id = ? AND fk_list = ? AND fk_user = ?;', [ name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
+        db.query('UPDATE persons SET nameFull = ?, descriptions = ?,  hours_initials = ?, hours_yielded = ?, hours_remaining = ?, hours_used = ?, hours_bag_used = ? WHERE id = ? AND fk_list = ? AND fk_user = ?;', [name, description, hoursInitial, hoursYielded, hoursRemaining, hoursUsed,
             hoursBagUsed, idPerson, idList, idUser], (error, row) => {
-            if (error) {
-                reject(error);
-            } else {
-                resolve(row);
-            };
-        });
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(row);
+                };
+            });
     });
 };
 
+
+const calcHoursRemaining = (param1, param2)=>param1-param2;
 
 module.exports = {
     getPersonById,

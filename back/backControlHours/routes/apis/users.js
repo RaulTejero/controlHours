@@ -14,13 +14,13 @@ router.get('/:mail', async (req, res) => {
     try {
         const result = await getUserByMail(req.params.mail);
         if (result.length < 1) {
-            res.json({ cod: 427 });
+            res.json({ error: 427 });
         } else {
-            res.json({ code: 233, result: result })
-        }
+            res.json({ status: 251, message: 233, user: result });
+        };
     } catch (error) {
         res.json({ error: error.message });
-    }
+    };
 });
 
 router.post('/', async (req, res) => {
@@ -31,12 +31,12 @@ router.post('/', async (req, res) => {
             req.body.password = bcrypt.hashSync(req.body.password, 10);
             const result = await create(req.body);
             if (result.affectedRows < 1) {
-                res.json({ error: 427 });
+                res.json({ error: 467 });
             } else {
-                res.json({ code: 230, message: "create" })
+                res.json({ status: 251 });
             }
         } else {
-            res.json({ code: 233, error: "no create" });
+            res.json({ status:467, message: 233});
         }
     } catch (error) {
         res.json({ error: error.messaje });
@@ -52,9 +52,9 @@ router.post('/login', async (req, res) => {
         }
         // const passwordCompared = bcrypt.compareSync(password, user[0].password);  --> no me ha funcionado
         if (password != user[0].password) {
-            return res.json({ error: 427, message: "password does not exist" })
+            return res.json({ status: 467, error: 458 })
         } else {
-            res.json({ message: "ok", token: createToken(user)  })
+            res.json({ status: 251, token: createToken(user)  })
         }
     } catch (error) {
         res.json({ error: error.messaje});
@@ -72,9 +72,9 @@ router.put('/', async (req, res) => {
     try {
         const result = await update(req.body);
         if (result.affectedRows != 0) {
-            res.json({ code: 230 });
+            res.json({ status: 251 });
         } else {
-            res.json({ code: 427 });
+            res.json({ status: 467, error: 427 });
         }
     } catch (error) {
         res.json({ error: error.messaje });

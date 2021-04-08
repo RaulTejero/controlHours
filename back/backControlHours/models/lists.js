@@ -4,11 +4,7 @@ const getAllLists = (idUser) => {
             if (error) {
                 reject(error);
             } else {
-                if (rows.length < 1) {
-                    resolve(null)
-                } else {                    
-                    resolve(rows)
-                };
+                resolve(rows)
             };
         });
     });

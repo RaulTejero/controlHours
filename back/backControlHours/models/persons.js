@@ -10,7 +10,7 @@ const getAllPersons = (idUser, idList)=> {
         });
     });
 };
-
+// restored 
 const restHoursAllPersons = (IdList, idUser ) => {
     return new Promise((resolve,reject)=> {
         db.query("UPDATE persons SET hours_used = 0 , hours_bag_used = 0  WHERE fk_list = ? AND fk_user = ?; ",[IdList, idUser], (error, rows)=> {

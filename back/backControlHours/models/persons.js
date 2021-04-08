@@ -37,7 +37,7 @@ const getTotalHoursInitialAllPersons = (idUser, idList)=> {
 
 const getTotalHoursYieldedAllPersons = (idUser, idList)=> {
     return new Promise((resolve, reject)=> {
-        db.query('SELECT SUM(hours_yielded) FROM persons WHERE fk_list = ? AND fk_user = ? ;',[idList, idUser],(error,result)=> {
+        db.query('SELECT SUM(hours_yielded) as totalHoursBag FROM persons WHERE fk_list = ? AND fk_user = ? ;',[idList, idUser],(error,result)=> {
             if (error) {
                 reject(error);
             } else {

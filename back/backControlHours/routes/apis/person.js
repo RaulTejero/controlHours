@@ -3,7 +3,9 @@ const router = express.Router();
 
 const {
     getAllPersons,
-    restoreHoursAllPersonsForIdList
+    restoreHoursAllPersonsForIdList,
+    getTotalHoursYieldedAllPersons,
+    getTotalHoursUsedBagAllPersons
 } = require('../../models/persons');
 
 const {
@@ -39,6 +41,15 @@ router.get('/:idPerson/list/:idList/user/:idUser', async (req, res) => {
     } catch (error) {
         res.json({ error: erros.message });
     };
+});
+
+router.get('/hoursBag/user/:idUser/list/:idList/', async (req,res)=> {
+    try {
+        const totalHoursYielded = await getTotalHoursYieldedAllPersons(req.params.idUser,req.params.idList);
+        res.json({status: 251, result: totalHoursYielded})
+    } catch (error) {
+        res.json({error: error.message})
+    }
 });
 
 router.post('/', async (req, res) => {
@@ -81,7 +92,7 @@ router.put('/', async (req, res) => {
             res.json({ status: 251, updatePerson: personAffected, changesPerson: [req.body] });
         } else {
             res.json({ code: 427 });
-        }
+        };
     } catch (error) {
         res.json({ error: error.message });
     };

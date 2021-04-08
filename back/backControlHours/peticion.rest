@@ -43,7 +43,11 @@ GET http://localhost:3000/api/person/all/list/22/user/7
 ###
 
 // person for id idperson/idList/idUser
-GET http://localhost:3000/api/person/17/list/13/user/1
+GET http://localhost:3000/api/person/17/list/13/user/2
+
+###
+
+GET http://localhost:3000/api/person/hoursBag/user/1/list/13
 
 ###
 // CREATE person 

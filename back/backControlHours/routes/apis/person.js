@@ -52,6 +52,15 @@ router.get('/hoursBag/user/:idUser/list/:idList/', async (req,res)=> {
     }
 });
 
+router.get('/hoursUsedBag/user/:idUser/list/:idList/', async (req,res)=> {
+    try {
+        const totalHoursUsedBag = await getTotalHoursUsedBagAllPersons(req.params.idUser,req.params.idList);
+        res.json({status: 251, result: totalHoursUsedBag})
+    } catch (error) {
+        res.json({error: error.message})
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const hoursRemaining = calcHoursRemaining(req.body.hoursInitial, req.body.hoursYielded);
@@ -113,3 +122,4 @@ router.put('/restore/:idList/:idUser', async (req, res) => {
 });
 
 module.exports = router;
+// TODO: ultimo total hours 

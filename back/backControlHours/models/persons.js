@@ -49,7 +49,7 @@ const getTotalHoursYieldedAllPersons = (idUser, idList)=> {
 
 const getTotalHoursUsedBagAllPersons = (idUser, idList)=> {
     return new Promise((resolve, reject)=> {
-        db.query('SELECT SUM(hours_bag_used) FROM persons WHERE fk_list = ? AND fk_user = ? ;',[idList, idUser],(error,result)=> {
+        db.query('SELECT SUM(hours_bag_used) AS totalHoursUsedBag FROM persons WHERE fk_list = ? AND fk_user = ? ;',[idList, idUser],(error,result)=> {
             if (error) {
                 reject(error);
             } else {

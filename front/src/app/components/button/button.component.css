@@ -5,7 +5,7 @@ button {
         padding: 0;
         width: auto;
         overflow: visible;
-        background: transparent;
+        background-color: transparent;
         /* inherit font & color from ancestor */
         color: inherit;
         font: inherit;
@@ -17,6 +17,13 @@ button {
         /* Corrects inability to style clickable `input` types in iOS */
         -webkit-appearance: none;
         padding: .3em;
-        border: 1px solid red;
         font-size: var(--fontSizeNormal);
+        border-radius: 5px;
+        outline: none;
+}
+button:hover {
+       cursor: pointer; 
+}
+button:active {
+        transform: scale(.9);
 }

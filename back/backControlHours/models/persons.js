@@ -59,6 +59,8 @@ const getTotalHoursUsedBagAllPersons = (idUser, idList)=> {
     });
 };
 
+
+
 module.exports = {
     getAllPersons,
     restoreHoursAllPersonsForIdList,

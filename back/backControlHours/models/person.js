@@ -53,12 +53,12 @@ const updateById = ({ name, description, hoursInitial, hoursYielded, hoursRemain
 };
 
 
-const calcHoursRemaining = (param1, param2)=>param1-param2;
+const calcSubs = (param1, param2)=>param1-param2;
 
 module.exports = {
     getPersonById,
     create,
     deleteForId,
     updateById,
-    calcHoursRemaining
+    calcSubs
 }

@@ -13,7 +13,7 @@ const {
     create,
     deleteForId,
     updateById,
-    calcHoursRemaining
+    calcSubs
 } = require('../../models/person')
 
 
@@ -61,9 +61,24 @@ router.get('/hoursUsedBag/user/:idUser/list/:idList/', async (req,res)=> {
     }
 });
 
+router.get('/hoursTotal/user/:idUser/list/:idList/', async (req,res)=> {
+    try {
+        const totalHoursYielded = await getTotalHoursYieldedAllPersons(req.params.idUser,req.params.idList);
+        const totalHoursUsedBag = await getTotalHoursUsedBagAllPersons(req.params.idUser,req.params.idList);
+        const result = {
+            totalBag: totalHoursYielded[0].totalHoursBag,
+            totalUsed: totalHoursUsedBag[0].totalHoursUsedBag,
+            subs:  totalHoursYielded[0].totalHoursBag - totalHoursUsedBag[0].totalHoursUsedBag
+        };
+        res.json({status:251, result:result})   
+    } catch (error) {
+        res.json({error: error.message})
+    };
+});
+
 router.post('/', async (req, res) => {
     try {
-        const hoursRemaining = calcHoursRemaining(req.body.hoursInitial, req.body.hoursYielded);
+        const hoursRemaining = calcSubs(req.body.hoursInitial, req.body.hoursYielded);
         req.body.hoursRemaining = hoursRemaining;
         const result = await create(req.body);
         if (result.affectedRows != 0) {
@@ -93,7 +108,7 @@ router.delete('/:idPerson/list/:idList/user/:idUser', async (req, res) => {
 
 router.put('/', async (req, res) => {
     try {
-        const hoursRemaining = calcHoursRemaining(req.body.hoursInitial, req.body.hoursYielded);
+        const hoursRemaining = calcSubs(req.body.hoursInitial, req.body.hoursYielded);
         req.body.hoursRemaining = hoursRemaining;
         const personAffected = await getPersonById(req.body.idUser, req.body.idList, req.body.idPerson);
         const result = await updateById(req.body);

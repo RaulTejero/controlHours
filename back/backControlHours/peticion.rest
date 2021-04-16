@@ -73,7 +73,7 @@ Content-Type: application/json
     "name": "Chjke",
     "description": "carretillas",
     "hoursInitial": 100,
-    "hoursYielded": 50,
+    "hoursYielded": 47,
     "hoursRemaining": 0,
     "hoursUsed": 0,
     "hoursBagUsed": 0,
@@ -155,4 +155,25 @@ Content-Type: application/json
     "password" : "jdsdjksjh"
 }
 
+
+
+# -------------MESSAGE----------
+###
+
+GET http://localhost:3000/api/message/13
+
+
+###
+
+
+POST http://localhost:3000/api/message
+Content-Type: application/json
+
+{
+    "message":"dsfsdf", 
+    "person":"jsdfjhsdfj",
+    "descriptions":"hsdhhfdh",
+    "hours":10, 
+    "idList":13
+}
 ###

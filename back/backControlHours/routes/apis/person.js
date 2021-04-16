@@ -84,7 +84,7 @@ router.post('/', async (req, res) => {
         if (result.affectedRows != 0) {
             res.json({ status: 251, newPerson: req.body })
         } else {
-            res.json({ status: 467, error: 427, result: null });
+            res.json({ status: 467, error: 427});
         };
     } catch (error) {
         res.json({ error: error.message })

@@ -4,11 +4,7 @@ const getForId = (idUser, idList) => {
             if (error) {
                 reject(error);
             } else {
-                if (row.length < 1) {
-                    resolve(null)
-                } else {
-                    resolve(row);
-                };
+                resolve(row);
             };
         });
     });
